@@ -1,0 +1,52 @@
+Test case 1: No vehicles or trains detected approaching crossing
+  1.	Gate remains DOWN, system remains actively alert for when a vehicle is detected to approach.
+
+Test case 2: Vehicle approaches crossing, no train activity detected.
+  1.	Vehicle detected approaching crossing
+  2.	System checks for trains on crossing zone racks (none)
+  3.	System checks for trains approaching tracks (none)
+  4.	Gate UP, audio and light signal ON
+  5.	While gate UP, system continuously checks to see if vehicle is still in crossing zone. Once vehicle has left crossing zone, gate lowers, and system loops back to the beginning.
+Expected result: Vehicle crosses safely, gate returns to closed position. 
+
+Test case 3: Vehicle detected approaching crossing while train is passing over crossing
+  1.	Vehicle detected approaching crossing
+  2.	System checks for trains on crossing zone tracks (YES)
+  3.	Gate remains DOWN, system continuously checks to see if train is still on crossing zone tracks. 
+  4.	Once train has left crossing zone, system checks for trains approaching tracks (none)
+  5.	Gate UP, audio and light signal ON
+  6.	While gate UP, system continuously checks to see if vehicle is still in crossing zone. Once vehicle has left crossing zone, gate lowers, and system loops back to the beginning.
+Expected result: Vehicle unable to cross as gate remains DOWN until train has left crossing zone tracks. Then vehicle is able to cross safely.
+
+Test case 4: While vehicle approaches crossing, train is detected approaching on track 1/ activates sensor A1. 
+  1.	Vehicle detected approaching crossing
+  2.	System checks for trains on crossing zone tracks (none)
+  3.	System checks for trains approaching tracks (YES)
+  4.	Gate remains DOWN, system loops back to step 2 (trains on tracks)
+  5.	Gate remains DOWN until train has stopped approaching tracks AND left the tracks. 
+  6.	Once the coast is clear Gate UP, audio and light signal ON
+  7.	While gate UP, system continuously checks to see if vehicle is still in crossing zone. Once vehicle has left crossing zone, gate lowers, and system loops back to the beginning.
+Expected result: Vehicle and train detected approaching crossing, vehicle not allowed to cross as gate remains DOWN until train has left crossing, once train has left crossing, gate UP and vehicle can cross safely, after which gate returns to closed position.
+
+Test case 5: Vehicle approaches crossing while train is passing over crossing AND another train is approaching crossing.
+  1.	Vehicle detected approaching crossing
+  2.	System checks for trains on crossing zone tracks (YES)
+  3.	Gate remains DOWN, system continuously checks to see if train is still on crossing zone tracks. 
+  4.	Once train has left crossing zone, system checks for trains approaching tracks (YES)
+  6.	Gate remains DOWN, system loops back to step 2 (trains on tracks)
+  7.	Gate remains DOWN until train has stopped approaching tracks AND left the tracks. 
+  8.	Once the coast is clear Gate UP, audio and light signal ON
+  9.	While gate UP, system continuously checks to see if vehicle is still in crossing zone. Once vehicle has left crossing zone, gate lowers, and system loops back to the beginning.
+Expected result: Vehicle unable to cross as gate remains DOWN until train has left crossing zone tracks. System then detects train approaching crossing after train has left crossing zone. Vehicle not allowed to cross as gate remains DOWN until train has left crossing, once train has left crossing, gate UP and vehicle can cross safely, after which gate returns to closed position.
+
+Test case 6: Vehicle travelling over crossing and a train is detected to be approaching crossing.
+  1.	Gate UP as vehicle detected to still be in crossing zone. 
+  2.	Gate does not go DOWN until vehicle has passed over crossing zone, to ensure vehicle is not trapped inside crossing zone. 
+  3.	Gate DOWN once vehicle has passed crossing zone
+Expected result: Vehicle enabled to finish crossing even though a train has been detected to be approaching. This means that the train approaching sensors MUST be placed at such a distance that a vehicle that is in the process of crossing has enough time to do so. 
+
+Test case 7: After one vehicle has passed over crossing, another vehicle detected approaching crossing
+  1.	First vehicle passes through crossing and system proceeds to lower gate.
+  2.	Another vehicle is detected. System goes through all the decisions to decide whether it is safe for gate to raise so that vehicle can proceed
+  3.	If the coast is clear, gates raise again for second vehicle
+Expected result: Each vehicle is able to pass crossing. System re-evaluates safety each time a vehicle approaches crossing. However a possible problem that can occur here is what if the second vehicle sees that the gate is up and that a car has just passed through? What if multiple cars are travelling sequentially at the same time? There needs to be a form of traffic management alongside this system to ensure that too many vehicles don’t try to cross at the same time.
