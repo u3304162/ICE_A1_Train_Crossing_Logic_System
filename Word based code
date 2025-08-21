@@ -1,0 +1,8 @@
+WORD BASED CODE
+1. System ON- Gates are DOWN by default.
+2. Vehicle detection check- Are vehicles approaching the tracks? If no vehicles are approaching, leave gates DOWN and return to step 1. If vehicles approaching, proceed to step 3.
+3. Train detection check- First check sensor to see if trains are currently on the track. If YES, gates stay DOWN. If NO proceed to step 4.
+4. Train Approach check- Check sensors A1 and A2 on the tracks to see if any trains are approaching. If YES, gates stay DOWN, and system loops back to step 3. If NO, raise gates.
+5. Gates are raised. Light signal indicating gates are raised ON + audio alarm to signify gates are being raised and crossing is opening ON (keeps driver alert).
+   While gates are raised, check sensor C to see if vehicle is still on crossing zone tracks. Until it leaves the tracks, gate stays UP.
+   Once the vehicle has left the tracks, then lower GATE, and loop back to START. 
